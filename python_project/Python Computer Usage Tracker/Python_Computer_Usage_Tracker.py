@@ -115,24 +115,23 @@ def save_data():
     s = total % 60
 
     try:
-        # 백업
-        with open(backup_file, "w", encoding="utf-8") as f:
-            f.write(current_date + "\n")
-            f.write(str(total))
-
-        # 로그
         with open(log_file, "w", encoding="utf-8") as f:
+
+            # 🔥 고정 헤더
             f.write(f"==== {current_date} 사용 기록 ====\n\n")
-            f.write(f"저장 시간: {datetime.now().strftime('%H:%M:%S')}\n")
-            f.write(f"사용 시간: {h:02}:{m:02}:{s:02}\n")
+
+            # 🔥 네가 원하는 4줄 구조
+            f.write(f"마지막 저장 시간 : {datetime.now().strftime('%H:%M:%S')}\n")
+            f.write(f"현재 상태 : 사용 중\n")
+            f.write(f"사용시간 : {h:02}:{m:02}:{s:02}\n")
 
             if total > SOCIAL_AVG:
-                f.write("상태: 평균 초과\n")
+                f.write("상태 : 평균 초과\n")
             else:
-                f.write("상태: 평균 이하\n")
+                f.write("상태 : 평균 이하\n")
 
-    except:
-        pass
+    except Exception as e:
+        print("저장 오류:", e)
 
 
 atexit.register(save_data)
