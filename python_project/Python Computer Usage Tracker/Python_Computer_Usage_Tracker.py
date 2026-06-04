@@ -60,7 +60,7 @@ def notify(title, message):
 AUTO_SAVE_INTERVAL = 10
 HOURLY_NOTIFY = 3600
 
-SOCIAL_AVG = 3 * 3600 + 5 * 60  # 초 기준
+SOCIAL_AVG = 5 * 3600 + 19 * 60  # 초 기준
 
 
 # ==================================================
@@ -172,7 +172,7 @@ notify("프로그램 시작", "사용 시간 측정 시작")
 avg_h = SOCIAL_AVG // 3600
 avg_m = (SOCIAL_AVG % 3600) // 60
 
-notify("하루 평균", f"{avg_h}시간 {avg_m}분")
+notify("일일 평균 스크린 타임", f"{avg_h}시간 {avg_m}분")
 
 
 print(tracker.show_program_name())
@@ -236,7 +236,7 @@ try:
                 last_hour_notify = hour_now
 
                 notify(
-                    "사용 시간",
+                    "현재 사용 시간",
                     f"{h}시간 {m}분 사용 중"
                 )
 
