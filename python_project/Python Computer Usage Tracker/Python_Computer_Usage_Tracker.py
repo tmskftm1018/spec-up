@@ -80,7 +80,7 @@ last_hour_notify = -1
 # ==================================================
 current_date = datetime.now().strftime("%Y-%m-%d")
 log_file = f"{current_date}_usage_log.txt"
-backup_file = "usage_backup.txt"
+backup_file = "usage.txt"
 
 
 # ==================================================
@@ -115,12 +115,15 @@ def save_data():
     s = total % 60
 
     try:
+
+        with open(backup_file, "w", encoding="utf-8") as f:
+            f.write(current_date + "\n")
+            f.write(str(total) + "\n")
+
         with open(log_file, "w", encoding="utf-8") as f:
 
-            # 🔥 고정 헤더
             f.write(f"==== {current_date} 사용 기록 ====\n\n")
 
-            # 🔥 네가 원하는 4줄 구조
             f.write(f"마지막 저장 시간 : {datetime.now().strftime('%H:%M:%S')}\n")
             f.write(f"현재 상태 : 사용 중\n")
             f.write(f"사용시간 : {h:02}:{m:02}:{s:02}\n")
@@ -132,9 +135,6 @@ def save_data():
 
     except Exception as e:
         print("저장 오류:", e)
-
-
-atexit.register(save_data)
 
 
 # ==================================================
