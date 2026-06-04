@@ -1,6 +1,8 @@
-Set WshShell = CreateObject("WScript.Shell")
+Set objShell = CreateObject("WScript.Shell")
 
-WshShell.Run chr(34) & _
-"C:\Users\User\Desktop\Python Computer Usage Tracker\start_tracker.bat" & chr(34), 0
+Set fso = CreateObject("Scripting.FileSystemObject")
+scriptPath = fso.GetParentFolderName(WScript.ScriptFullName)
 
-Set WshShell = Nothing
+command = "cmd /k py """ & scriptPath & "\Python_Computer_Usage_Tracker.py"""
+
+objShell.Run command, 0, False
